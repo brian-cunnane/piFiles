@@ -5,6 +5,7 @@
 #               Data is not deliniated
 import serial
 import MySQLdb
+
 ser = serial.Serial("/dev/ttyAMA0")
 ser.baudrate = 9600
 ser.flushInput()
@@ -20,7 +21,6 @@ while 1:
                 if len(myList) == 7:
                         for index in range(2,6):
                                 checksum = checksum ^ ord(myList[index])
-#                        print "this is checksum %d" %checksum
                         if checksum == ord(myList[6]):
 				for index in range(0,7):
 					myList[index] = ord(myList[index])
@@ -33,4 +33,8 @@ while 1:
         except (IndexError, serial.SerialException) as Error:
                 print("Exception caught")
 		print(Error)
+	except MySQLdb.Error as DbError:
+		db.rollback()
+		print("Database Error")
+		print(DbError)
 

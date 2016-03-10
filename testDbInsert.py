@@ -3,7 +3,6 @@
 #Description: Test script to insert values into database
 
 import MySQLdb
-import time
 
 now = time.strftime("%c")
 print "connecting"
