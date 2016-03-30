@@ -23,14 +23,16 @@ public class QueryServlet extends HttpServlet{
                         int count = 0;
 			find = connection.prepareStatement(sql);
                         ResultSet rset = find.executeQuery();
+			out.println("<table><tr><th>Temperature</th><th>Weight</th><th>Humidity</th><th>Time</th><th>Date</th></tr>");
                         while(rset.next()){
-                                out.println("<p>"+rset.getInt("Temperature")
-                                                +"," + rset.getInt("Weight")
-                                                +"," + rset.getInt("Humidity")
-                                                +"," + rset.getTime("Time")
-                                                +"," + rset.getDate("Date") +"</p>");
+                                out.println("<tr><td>"+rset.getInt("Temperature")
+                                                +"</td><td>" + rset.getInt("Weight")
+                                                +"</td><td>" + rset.getInt("Humidity")
+                                                +"</td><td>" + rset.getTime("Time")
+                                                +"</td><td>" + rset.getDate("Date") +"</td></tr>");
                                 count++;
                         }
+			out.println("</table>");
                         out.println("<p>======" + count + " records found =====</p>");
                         out.println("</body></hmtl>");
                 }catch(SQLException SQLE){
