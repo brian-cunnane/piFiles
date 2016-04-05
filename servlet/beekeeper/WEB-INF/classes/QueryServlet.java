@@ -11,7 +11,7 @@ public class QueryServlet extends HttpServlet{
         public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
                 response.setContentType("text/html");
                 out = response.getWriter();
-                out.println("<html><head><title>Query Results</title></head><body>");
+                out.println("<html><head><meta http-equiv=\"refresh\" content =\"30\"/><title>Query Results</title></head><body>");
                 out.println("<h2>Thanks for your query.</h2>");
 		out.println("<p>Hello</p>");
                 try{
