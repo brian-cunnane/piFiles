@@ -12,11 +12,11 @@ myList = []
 print("Starting")
 while 1:
 	try:
-		for index in range(0,7):
+		for index in range(0,10):
 			state = ser.read(1)
 			x = state.encode('hex')
 			myList.append(x)
-			if len(myList) == 7:			
+			if len(myList) == 10:			
 				print myList
 				myList = []		
 	except IndexError:

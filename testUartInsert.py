@@ -25,7 +25,7 @@ while 1:
 				for index in range(0,7):
 					myList[index] = ord(myList[index])
 				print myList
-				cursor.execute("INSERT INTO HIVE1(TEMPERATURE,HUMIDITY,WEIGHT,TIME,DATE) VALUES(%s,%s,%s,CURTIME(),CURDATE())",(myList[3],myList[4],myList[5]))
+				cursor.execute("INSERT INTO HIVE1(TEMPERATURE,WEIGHT,HUMIDITY,TIME,DATE) VALUES(%s,%s,%s,CURTIME(),CURDATE())",(myList[3],myList[4],myList[5]))
 				db.commit()
 			else: print ("Checksum mismatch, discarding packet")
                         myList[:] = []

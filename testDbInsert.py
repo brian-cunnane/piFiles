@@ -4,7 +4,7 @@
 
 import MySQLdb
 
-now = time.strftime("%c")
+#now = time.strftime("%c")
 print "connecting"
 db = MySQLdb.connect("localhost","Administrator","admin","BEEKEEPER")
 cursor = db.cursor()
