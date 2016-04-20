@@ -11,17 +11,20 @@ public class QueryServlet extends HttpServlet{
 	PrintWriter out = null;
         @Override
         public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-                response.setContentType("text/html");
-                out = response.getWriter();
+               // response.setContentType("text/html");
+               // out = response.getWriter();
 		String parameter = request.getParameter("all");
 		if (parameter.compareTo("all")==0){
+			response.setContentType("application/json");
+			out = response.getWriter();
 			try{
-				Class.forName("com.mwsql.jdbc.Driver");
+				Class.forName("com.mysql.jdbc.Driver");
 				connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/BEEKEEPER","Administrator","admin");
 				String query = "SELECT * FROM BEEKEEPER.HIVE1";
 				String jsonString = null;
 				find = connection.prepareStatement(query);
 				JSONObject json = new JSONObject();
+				json.put("key","Value");
 				ResultSet rset = find.executeQuery();
 				while(rset.next()){
 					json.put("temperature",rset.getInt("Temperature"));
@@ -43,6 +46,8 @@ public class QueryServlet extends HttpServlet{
                		}
 		}
 		else{
+			response.setContentType("text/html");
+			out = response.getWriter();
                 	out.println("<html><head><meta http-equiv=\"refresh\" content =\"30\"/><title>Query Results</title></head><body>");
                 	out.println("<h2>Thanks for your query.</h2>");
 			out.println("<p>Hello</p>");
