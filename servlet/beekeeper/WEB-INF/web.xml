@@ -8,5 +8,13 @@
         <servlet-name>testing</servlet-name>
         <url-pattern>/test</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>android</servlet-name>
+        <servlet-class>AndroidServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>android</servlet-name>
+        <url-pattern>/android</url-pattern>
+    </servlet-mapping>
 
 </web-app>
