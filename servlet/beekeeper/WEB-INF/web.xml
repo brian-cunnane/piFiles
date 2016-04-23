@@ -6,7 +6,7 @@
 
     <servlet-mapping>
         <servlet-name>testing</servlet-name>
-        <url-pattern>/test</url-pattern>
+        <url-pattern>/browser</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>android</servlet-name>
