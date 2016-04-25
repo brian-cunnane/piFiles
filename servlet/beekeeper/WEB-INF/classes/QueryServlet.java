@@ -20,17 +20,15 @@ public class QueryServlet extends HttpServlet{
                 "<script src=\"http://code.jquery.com/jquery-latest.js\"></script>" +
                 "<script src=\"http://code.highcharts.com/highcharts.js\"></script>" +
                 "</head><body>");
-        out.println("<h2>Thanks for your query.</h2>");
         try{
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/BEEKEEPER","root","root");
-            String sql = "SELECT * FROM BEEKEEPER.HIVE1";
-            out.println("<p>Your Query is: " + sql + "</p>");
+            String sql = "SELECT * FROM BEEKEEPER.HIVE1 ORDER BY date DESC, time DESC LIMIT 100";
             int count = 0;
             find = connection.prepareStatement(sql);
             ResultSet rset = find.executeQuery();
-            out.println("");
-            out.println("<div id=\"container\" style=\"width:100%; height:400px;\"></div>");
+            //out.println("");
+            out.println("<div id=\"container\" style=\"width:100%; height:1000px;\"></div>");
             out.println("<script src =\"./scripts/chart.js\"></script>" +
                     "<script type=\"text/javascript\" src=\"/js/themes/gray.js\"></script>" +
                     "<script type=\"text/javascript\" src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\"></script>");
@@ -48,18 +46,20 @@ public class QueryServlet extends HttpServlet{
             JSONObject jsonHumidity = new JSONObject();
 
             while(rset.next()){
-                tempsArray.put(rset.getInt("Temperature"));
-                weightsArray.put(rset.getInt("Weight"));
-                humidityArray.put(rset.getInt("Humidity"));
-                timesArray.put(rset.getTime("Time"));
-                datesArray.put(rset.getDate("Date"));
-
-                out.println("<tr><td>"+rset.getInt("Temperature")
-                        +"</td><td>" + rset.getInt("Weight")
-                        +"</td><td>" + rset.getInt("Humidity")
-                        +"</td><td>" + rset.getTime("Time")
-                        +"</td><td>" + rset.getDate("Date") +"</td></tr>");
-                count++;
+		try{
+	                tempsArray.put(rset.getInt("Temperature"));
+	                weightsArray.put(rset.getDouble("Weight"));
+	                humidityArray.put(rset.getInt("Humidity"));
+	                timesArray.put(rset.getTime("Time"));
+	                datesArray.put(rset.getDate("Date"));
+	
+	                out.println("<tr><td>"+rset.getInt("Temperature")
+	                        +"</td><td>" + rset.getDouble("Weight")
+	                        +"</td><td>" + rset.getInt("Humidity")
+	                        +"</td><td>" + rset.getTime("Time")
+	                        +"</td><td>" + rset.getDate("Date") +"</td></tr>");
+                	count++;
+		}catch(JSONException JE){JE.printStackTrace();}
             }
             try {
                 jsonDates.put("data",datesArray);
@@ -88,7 +88,7 @@ public class QueryServlet extends HttpServlet{
             try{
                 String relativePath = "/scripts/JSONData.json";
                 String absolutePath = getServletContext().getRealPath(relativePath);
-                out.println("<br>"+absolutePath+"</br>");
+                
                 File file = new File(absolutePath);
                 file.createNewFile();
                 FileOutputStream fileOutputStream = new FileOutputStream(file);

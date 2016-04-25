@@ -4,14 +4,14 @@ $(document).ready(function() {
             renderTo: 'container',
             type: 'line',
             marginRight: 130,
-            marginBottom: 25
+            marginBottom: 100
         },
         title: {
             text: 'Environmental Factors Hive 1',
             x: -20 //center
         },
         subtitle: {
-            text: '',
+            text: 'Final Year Project Brian Cunnane',
             x: -20
         },
         xAxis: {
@@ -19,7 +19,7 @@ $(document).ready(function() {
         },
         yAxis: {
             title: {
-                text: 'time'
+                text: ''
             },
             plotLines: [{
                 value: 0,
@@ -44,7 +44,7 @@ $(document).ready(function() {
         series: []
     }
 
-    $.getJSON("192.168.0.22:8080/beekeeper/scripts/JSONData.json", function(json) {
+    $.getJSON("./scripts/JSONData.json", function(json) {
         options.xAxis.categories = json[1]['data'];
         options.series[0] = json[2];
         options.series[1] = json[3];

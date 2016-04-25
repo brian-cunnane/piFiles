@@ -12,7 +12,9 @@ import java.io.StringWriter;
 import java.sql.*;
 
 /**
- * Created by brian on 18/04/2016.
+ *Author: Brian Cunnane 
+ *Date: 18/04/2016.
+ *Description: servlet to create json data for android app.
  */
 public class AndroidServlet extends HttpServlet {
     Connection connection = null;
