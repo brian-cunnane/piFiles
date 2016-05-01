@@ -1,13 +1,13 @@
 $(document).ready(function() {
     var options = {
         chart: {
-            renderTo: 'container',
+            renderTo: 'weight',
             type: 'line',
             marginRight: 130,
-            marginBottom: 25
+            marginBottom: 50
         },
         title: {
-            text: 'Environmental Factors Hive 1',
+            text: 'Weight: Hive 1',
             x: -20 //center
         },
         subtitle: {
@@ -19,7 +19,7 @@ $(document).ready(function() {
         },
         yAxis: {
             title: {
-                text: 'time'
+                text: ''
             },
             plotLines: [{
                 value: 0,
@@ -45,12 +45,69 @@ $(document).ready(function() {
     }
     //var inp = FileReader.readAsText("file:///C:/Users/brian/Documents/year5/project/code/testServlet/out/artifacts/testServlet_war_exploded/scripts/JSONData.json");
     //var inp = readTextFile("/scripts/JSONData.json");
-    $.getJSON("/scripts/JSONData.json", function(json) {
+    $.getJSON("./scripts/JSONData.json", function(json) {
         options.xAxis.categories = json[1]['data'];
-        options.series[0] = json[2];
-        options.series[1] = json[3];
-        options.series[2] = json[4];
+        //options.series[0] = json[2];
+        options.series[0] = json[3];
+        //options.series[2] = json[4];
         chart = new Highcharts.Chart(options);
+        //alert(json);
+    });
+});
+
+$(document).ready(function() {
+    var options2 = {
+        chart: {
+            renderTo: 'temp',
+            type: 'line',
+            marginRight: 130,
+            marginBottom: 50
+        },
+        title: {
+            text: 'Environmental Factors Hive 1',
+            x: -20 //center
+        },
+        subtitle: {
+            text: '',
+            x: -20
+        },
+        xAxis: {
+            categories: []
+        },
+        yAxis: {
+            title: {
+                text: ''
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            formatter: function() {
+                return '<b>'+ this.series.name +'</b><br/>'+
+                    this.x +': '+ this.y;
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -10,
+            y: 100,
+            borderWidth: 0
+        },
+        series: []
+    }
+    //var inp = FileReader.readAsText("file:///C:/Users/brian/Documents/year5/project/code/testServlet/out/artifacts/testServlet_war_exploded/scripts/JSONData.json");
+    //var inp = readTextFile("./scripts/JSONData.json");
+    $.getJSON("./scripts/JSONData.json", function(json) {
+        options2.xAxis.categories = json[1]['data'];
+        options2.series[0] = json[2];
+        //options.series[1] = json[3];
+        options2.series[1] = json[4];
+        chart = new Highcharts.Chart(options2);
         //alert(json);
     });
 });

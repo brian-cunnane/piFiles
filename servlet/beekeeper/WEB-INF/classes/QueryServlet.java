@@ -28,7 +28,10 @@ public class QueryServlet extends HttpServlet{
             find = connection.prepareStatement(sql);
             ResultSet rset = find.executeQuery();
             //out.println("");
-            out.println("<div id=\"container\" style=\"width:100%; height:1000px;\"></div>");
+            out.println("<div>"+
+			"<div id=\"weight\" class=\"container\" style=\"width:50%; display:inline-block;\"></div>"+
+			"<div id=\"temp\" class=\"container\" style=\"width:50%; display:inline-block;\"></div>"+
+			"</div>");
             out.println("<script src =\"./scripts/chart.js\"></script>" +
                     "<script type=\"text/javascript\" src=\"/js/themes/gray.js\"></script>" +
                     "<script type=\"text/javascript\" src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\"></script>");

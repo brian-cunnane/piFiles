@@ -34,6 +34,7 @@ while 1:
 					myList[index] = ord(myList[index])
 				print myList
 				weight = (myList[4] << 24) + (myList[5] << 16) + (myList[6] << 8) + (myList[7])
+				print weight
 				weight = weight/1000.0
 				cursor.execute("INSERT INTO HIVE1(TEMPERATURE,WEIGHT,HUMIDITY,TIME,DATE) VALUES(%s,%s,%s,CURTIME(),CURDATE())",(myList[3],weight,myList[8]))
 				db.commit()

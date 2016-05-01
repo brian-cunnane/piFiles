@@ -6,10 +6,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.ServletContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.sql.*;
+import java.io.*;
 
 /**
  *Author: Brian Cunnane 
@@ -23,8 +25,8 @@ public class AndroidServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String parameter = "";
-        parameter = request.getParameter("test");
-        if (parameter.compareTo("test")==0){
+        //parameter = request.getParameter("test");
+        if (request.getParameter("Hive1") != null){
             response.setContentType("application/json");
             out = response.getWriter();
             try{
@@ -39,7 +41,7 @@ public class AndroidServlet extends HttpServlet {
                 JSONArray jsonArray = new JSONArray();
                 while(rset.next()){
                     json.put("temperature",rset.getInt("Temperature"));
-                    json.put("weight",rset.getInt("Weight"));
+                    json.put("weight",rset.getDouble("Weight"));
                     json.put("humidity",rset.getInt("Humidity"));
                     json.put("time",rset.getTime("Time"));
                     json.put("date",rset.getDate("Date"));
@@ -58,6 +60,22 @@ public class AndroidServlet extends HttpServlet {
                 CNFE.printStackTrace();
             }
         }
+	else if(request.getParameter("Hive2") != null){
+		response.setContentType("application/json");
+            	out = response.getWriter();
+           	try{
+			String relativePath = "/scripts/hive2.json";
+	                ServletContext context = this.getServletContext();
+			InputStream IS = context.getResourceAsStream(relativePath);
+			InputStreamReader ISR = new InputStreamReader(IS);
+			BufferedReader BR = new BufferedReader(ISR);
+			String data = "";
+			while((data = BR.readLine()) != null){
+				out.println(data);
+			}
+		
+		}catch(IOException IOE){IOE.printStackTrace();}
+	}
         else{
             out.println("<br>parameter is: "+parameter+"</br");
             out.println("<br>Something is wrong</br>");
